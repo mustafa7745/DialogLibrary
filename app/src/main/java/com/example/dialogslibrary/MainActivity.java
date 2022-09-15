@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         DialogInput dialogInput=new DialogInput(this);
         dialogInput.setTitle("User Information")
                 .setSubtitle("write your profile info here")
-                .setFirstTextField("mmm")
-                .setSecondTextField("third")
+                .setFirstTextField("Username:","mustafa")
+                .setSecondTextField("Email","mustafa@gmail.com")
                 .isEnabledFirstTextField(false)
                 .setIcon(R.mipmap.ic_launcher_round)
                 .setLargeTextField("")
-                .setThirdTextField("")
+                .setThirdTextField("mustafa","email")
                 .setFirstButtonText("CONNECT")
                 .setSecondButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {

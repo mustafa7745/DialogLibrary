@@ -33,8 +33,21 @@ android:id="@+id/main_scrollview">
             android:textSize="24sp"
             android:layout_marginBottom="8dp"/>
 
+
+
+
+
         <TextView
             android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="subtitle"
+            android:visibility="gone"
+            android:textColor="#998FA2"/>
+
+        <TextView
+            android:id="@+id/first_view_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -62,6 +75,43 @@ android:id="@+id/main_scrollview">
             android:layout_marginTop="10dp"
             android:textSize="16.5sp" />
 
+        <TextView
+            android:id="@+id/second_view_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="subtitle"
+            android:visibility="gone"
+            android:textColor="#998FA2"/>
+        <EditText
+            android:id="@+id/second_edit_text"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="text"
+            android:visibility="gone"
+            android:inputType="text"
+            android:paddingBottom="14dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="14dp"
+            android:textColor="@color/white"
+            android:textColorHint="#ffffff"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16.5sp" />
+
+
+        <TextView
+            android:id="@+id/third_view_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="subtitle"
+            android:visibility="gone"
+            android:textColor="#998FA2"/>
         <EditText
             android:id="@+id/third_edit_text"
             android:layout_width="280dp"
@@ -82,25 +132,6 @@ android:id="@+id/main_scrollview">
             android:layout_marginTop="10dp"
             android:textSize="16.5sp" />
 
-        <EditText
-            android:id="@+id/second_edit_text"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="28dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="text"
-            android:visibility="gone"
-            android:inputType="text"
-            android:paddingBottom="14dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="14dp"
-            android:textColor="@color/white"
-            android:textColorHint="#ffffff"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
-            android:textSize="16.5sp" />
 
         <EditText
             android:id="@+id/large_edit_text"

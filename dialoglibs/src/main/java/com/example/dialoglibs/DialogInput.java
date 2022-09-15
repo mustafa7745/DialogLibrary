@@ -38,10 +38,14 @@ public class DialogInput extends Dialog {
     private TextView third_button;
 
     private EditText first_edit_text;
-
     private EditText second_edit_text;
-
     private EditText third_edit_text;
+
+    private TextView first_view_text;
+    private TextView second_view_text;
+    private TextView third_view_text;
+
+
 
     private EditText large_edit_text;
 
@@ -62,6 +66,9 @@ public class DialogInput extends Dialog {
         first_edit_text=findViewById(R.id.first_edit_text);
         second_edit_text=findViewById(R.id.second_edit_text);
         third_edit_text=findViewById(R.id.third_edit_text);
+        first_view_text=findViewById(R.id.first_view_text);
+        second_view_text=findViewById(R.id.second_view_text);
+        third_view_text=findViewById(R.id.third_view_text);
         large_edit_text=findViewById(R.id.large_edit_text);
         icon=findViewById(R.id.icon);
         scrollView=findViewById(R.id.main_scrollview);
@@ -83,6 +90,7 @@ public class DialogInput extends Dialog {
         first_edit_text.setVisibility(View.GONE);
         second_edit_text.setVisibility(View.GONE);
         third_edit_text.setVisibility(View.GONE);
+        third_view_text.setVisibility(View.GONE);
         large_edit_text.setVisibility(View.GONE);
         third_button.setVisibility(View.GONE);
         first_button.setVisibility(View.GONE);
@@ -184,25 +192,35 @@ public class DialogInput extends Dialog {
         return this;
     }
 
-    public DialogInput setFirstTextField(String firstText) {
+    public DialogInput setFirstTextField(String firstTextView,String firstText) {
         first_edit_text.setVisibility(View.VISIBLE);
         first_edit_text.setText(firstText);
+        first_view_text.setVisibility(View.VISIBLE);
+        first_view_text.setText(firstTextView);
         return this;
     }
-    public DialogInput setThirdTextField(String firstText) {
+
+    public DialogInput setSecondTextField(String secondTextView,String secondText) {
+        second_edit_text.setVisibility(View.VISIBLE);
+        second_view_text.setVisibility(View.VISIBLE);
+        second_edit_text.setText(secondText);
+        second_view_text.setText(secondTextView);
+        return this;
+    }
+
+    public DialogInput setThirdTextField(String firstTextView,String firstText) {
         third_edit_text.setVisibility(View.VISIBLE);
+        third_view_text.setVisibility(View.VISIBLE);
+        third_view_text.setText(firstTextView);
         third_edit_text.setText(firstText);
         return this;
     }
 
-    public DialogInput setSecondTextField(String secondText) {
-        second_edit_text.setVisibility(View.VISIBLE);
-        second_edit_text.setText(secondText);
-        return this;
-    }
+
 
     public DialogInput setLargeTextField(String secondText) {
         large_edit_text.setVisibility(View.VISIBLE);
+
         large_edit_text.setText(secondText);
         return this;
     }
