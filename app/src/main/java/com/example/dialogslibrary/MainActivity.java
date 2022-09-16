@@ -1,12 +1,11 @@
 package com.example.dialogslibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.dialoglibs.DialogInput;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,29 +13,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         DialogInput dialogInput=new DialogInput(this);
-        dialogInput.setTitle("User Information")
-                .setSubtitle("write your profile info here")
-                .setFirstTextField("Username:","mustafa")
-                .setSecondTextField("Email","mustafa@gmail.com")
-                .isEnabledFirstTextField(false)
-                .setIcon(R.mipmap.ic_launcher_round)
-                .setLargeTextField("")
-                .setThirdTextField("mustafa","email")
-                .setFirstButtonText("CONNECT")
-                .setSecondButtonText("CANCEL")
+        dialogInput
+                .setTitle("Please Wait...")
+//                .setSubtitle("write your profile info here")
+                  .setProgressbar(View.VISIBLE)
+                .setBackgroundColor(R.color.white)
+                .setFirstButtonText("CANCEL")
                 .withFirstButtonListner(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, dialogInput.getFirstTextField(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .withSecondButtonListner(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
                         dialogInput.dismiss();
+                        DialogInput dialogInput1=new DialogInput(MainActivity.this);
+                        dialogInput1.setBackgroundColor(R.color.white).image_fail().setFirstButtonText("Ok").withFirstButtonListner(view1 -> {
+                            dialogInput1.dismiss();
+                        }).show();
                     }
-                })
-                .show();
+                }).show();
     }
 }

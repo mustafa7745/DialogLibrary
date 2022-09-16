@@ -2,6 +2,7 @@ package com.example.dialoglibs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,8 +14,11 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 
@@ -28,13 +32,10 @@ public class DialogInput extends Dialog {
     private Context context;
 
     private TextView title;
-
     private TextView subtitle;
 
     private TextView first_button;
-
     private TextView second_button;
-
     private TextView third_button;
 
     private EditText first_edit_text;
@@ -50,8 +51,12 @@ public class DialogInput extends Dialog {
     private EditText large_edit_text;
 
     private ImageView icon;
+    private ImageView image_success;
 
     private ScrollView scrollView;
+    private CardView card_view_progressBar;
+
+    private ProgressBar progressBar;
 
     public DialogInput(Context context) {
         super(context);
@@ -70,6 +75,9 @@ public class DialogInput extends Dialog {
         second_view_text=findViewById(R.id.second_view_text);
         third_view_text=findViewById(R.id.third_view_text);
         large_edit_text=findViewById(R.id.large_edit_text);
+        image_success=findViewById(R.id.image_success);
+        progressBar=findViewById(R.id.progressBar);
+        card_view_progressBar=findViewById(R.id.card_view_progressBar);
         icon=findViewById(R.id.icon);
         scrollView=findViewById(R.id.main_scrollview);
         this.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -110,10 +118,28 @@ public class DialogInput extends Dialog {
         icon.setImageResource(image);
         return this;
     }
+    public DialogInput image_success(){
+        image_success.setVisibility(View.VISIBLE);
+        image_success.setImageResource(R.drawable.checked);
+        return this;
+    }
+
+    public DialogInput image_fail(){
+        image_success.setVisibility(View.VISIBLE);
+        image_success.setImageResource(R.drawable.cancel);
+        return this;
+    }
 
     public DialogInput setIconString(String image){
         icon.setVisibility(View.VISIBLE);
         Glide.with(context).load(image).into(icon);
+        return this;
+    }
+
+    public DialogInput setProgressbar(int VISIBLEStatus){
+        card_view_progressBar.setVisibility(VISIBLEStatus);
+        card_view_progressBar.setCardBackgroundColor(Color.parseColor(LIGHT_PURPLE));
+        progressBar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
         return this;
     }
 
