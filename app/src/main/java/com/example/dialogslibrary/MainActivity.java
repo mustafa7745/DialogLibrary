@@ -1,35 +1,30 @@
 package com.example.dialogslibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dialoglibs.DialogInput;
 
 
 public class MainActivity extends AppCompatActivity {
+ String[] title=new String[]{"mustafa","asmail","mohammed"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         DialogInput dialogInput=new DialogInput(this);
-        dialogInput
-                .setTitle("Please Wait...")
-//                .setSubtitle("write your profile info here")
-                  .setProgressbar(View.VISIBLE)
-                .setBackgroundColor(R.color.white)
-                .setFirstButtonText("CANCEL")
-                .withFirstButtonListner(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialogInput.dismiss();
-                        DialogInput dialogInput1=new DialogInput(MainActivity.this);
-                        dialogInput1.setBackgroundColor(R.color.white).image_fail().setFirstButtonText("Ok").withFirstButtonListner(view1 -> {
-                            dialogInput1.dismiss();
-                        }).show();
-                    }
-                }).show();
+        dialogInput.setRadioButton(3,title).onSaveRadioButtonListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogInput.onSaveRadioButton();
+            }
+        }).show();
+
     }
 }

@@ -1,7 +1,10 @@
 package com.example.dialoglibs;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,14 +12,18 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
@@ -29,6 +36,9 @@ public class DialogInput extends Dialog {
     private static final String LIGHT_PURPLE ="#D47FA6" ;
     private static final String GREY_PURPLE ="#998FA2" ;
     private static final String DARK_PURPLE ="#241332" ;
+    int RadioId;
+    String RadioText;
+//    int RadioId=0;
     private Context context;
 
     private TextView title;
@@ -37,6 +47,7 @@ public class DialogInput extends Dialog {
     private TextView first_button;
     private TextView second_button;
     private TextView third_button;
+    private TextView save_radio_button;
 
     private EditText first_edit_text;
     private EditText second_edit_text;
@@ -57,6 +68,14 @@ public class DialogInput extends Dialog {
     private CardView card_view_progressBar;
 
     private ProgressBar progressBar;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
+    private RadioButton radioButton3;
+    private RadioButton radioButtonTest;
+
+    private SharedPreferences prefs ;
+    SharedPreferences.Editor myEdit ;
 
     public DialogInput(Context context) {
         super(context);
@@ -77,6 +96,11 @@ public class DialogInput extends Dialog {
         large_edit_text=findViewById(R.id.large_edit_text);
         image_success=findViewById(R.id.image_success);
         progressBar=findViewById(R.id.progressBar);
+        radioGroup=findViewById(R.id.radio_group);
+        radioButton1=findViewById(R.id.radiobutton1);
+        radioButton2=findViewById(R.id.radiobutton2);
+        radioButton3=findViewById(R.id.radiobutton3);
+        save_radio_button=findViewById(R.id.save_radio_button);
         card_view_progressBar=findViewById(R.id.card_view_progressBar);
         icon=findViewById(R.id.icon);
         scrollView=findViewById(R.id.main_scrollview);
@@ -86,6 +110,8 @@ public class DialogInput extends Dialog {
     }
 
     private void initDefaultCase() {
+        prefs = context.getSharedPreferences("mustafa", MODE_PRIVATE);
+        myEdit = context.getSharedPreferences("mustafa",MODE_PRIVATE).edit();
         setLargeTextFieldBorderColor(Color.parseColor(WHITE));
         setFirstTextFieldBorderColor(Color.parseColor(WHITE));
         setSecondTextFieldBorderColor(Color.parseColor(WHITE));
@@ -103,8 +129,13 @@ public class DialogInput extends Dialog {
         third_button.setVisibility(View.GONE);
         first_button.setVisibility(View.GONE);
         second_button.setVisibility(View.GONE);
+        radioButton1.setTextColor(Color.WHITE);
+        radioButton2.setTextColor(Color.WHITE);
+        radioButton3.setTextColor(Color.WHITE);
         title.setVisibility(View.GONE);
         subtitle.setVisibility(View.GONE);
+        RadioId=prefs.getInt("selected",-1);
+        RadioText=prefs.getString("selectedString","no Value Selected");
 
     }
 
@@ -118,6 +149,7 @@ public class DialogInput extends Dialog {
         icon.setImageResource(image);
         return this;
     }
+
     public DialogInput image_success(){
         image_success.setVisibility(View.VISIBLE);
         image_success.setImageResource(R.drawable.checked);
@@ -125,9 +157,57 @@ public class DialogInput extends Dialog {
     }
 
     public DialogInput image_fail(){
+
         image_success.setVisibility(View.VISIBLE);
         image_success.setImageResource(R.drawable.cancel);
         return this;
+    }
+
+
+    ///Radio Button
+    public DialogInput setRadioButton(int num,String[] title){
+        radioGroup.setVisibility(View.VISIBLE);
+        save_radio_button.setVisibility(View.VISIBLE);
+        if (num==1){
+            radioButton1.setVisibility(View.VISIBLE);
+            radioButton1.setText(title[0]);
+        }
+        else if(num==2){
+            radioButton1.setVisibility(View.VISIBLE);
+            radioButton2.setVisibility(View.VISIBLE);
+            radioButton1.setText(title[0]);
+            radioButton2.setText(title[1]);
+        }
+        else if(num==3){
+            radioButton1.setVisibility(View.VISIBLE);
+            radioButton2.setVisibility(View.VISIBLE);
+            radioButton3.setVisibility(View.VISIBLE);
+            radioButton1.setText(title[0]);
+            radioButton2.setText(title[1]);
+            radioButton3.setText(title[2]);
+        }
+        if (RadioId!=-1){
+            radioButtonTest=findViewById(RadioId);
+            radioButtonTest.setChecked(true);
+            RadioText=radioButtonTest.getText().toString();
+        }
+        return this;
+    }
+    public DialogInput onSaveRadioButtonListener(View.OnClickListener confirmListner){
+        save_radio_button.setOnClickListener(confirmListner);
+        return this;
+    }
+    public DialogInput onSaveRadioButton(){
+        myEdit.putInt("selected", radioGroup.getCheckedRadioButtonId());
+        myEdit.putString("selectedString", RadioText);
+        myEdit.apply();
+        return this;
+    }
+    public String getCheckedRadioButtonText(){
+            return RadioText;
+    }
+    public int getCheckedRadioButtonInt(){
+      return   RadioId;
     }
 
     public DialogInput setIconString(String image){
